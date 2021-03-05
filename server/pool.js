@@ -3,7 +3,7 @@ const pg = require('pg');
 // DB Config Options
 const Pool = pg.Pool;
 const pool = new Pool({
-  database: 'castor_koala', // name of our database
+  database: 'Data_Visual', // name of our database
   host: 'localhost', // where is your database
   port: 5432,
   max: 10, // how many connections
