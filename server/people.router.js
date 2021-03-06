@@ -2,7 +2,7 @@ const express = require('express');
 const pool = require('./pool');
 const router = express.Router();
 
-router.post((req, res) => {
+router.post('/', (req, res) => {
   const people = req.body;
   const insertPeople = `INSERT INTO "people" 
    ("name" ,
@@ -18,7 +18,7 @@ router.post((req, res) => {
       people.gender,
       people.language,
     ])
-    .then((result) => {
+    .then(() => {
       res.sendStatus(201);
       console.log(`${people} added to database`);
     })
