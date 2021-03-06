@@ -9,6 +9,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('build'));
 
+app.use('/people', peopleRouter);
+
 app.listen(PORT, () => {
   console.log(`Running on ${PORT}`);
 });
