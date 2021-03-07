@@ -12,6 +12,8 @@ router.post('/', (req, res) => {
       "gender", 
       "language")
       VALUES ($1, $2, $3, $4, $5);`;
+  //not necessary in a smallscale application
+  //adding all 50 individuals at once by calling pool query for each person.
   people.map((person) => {
     pool
       .query(insertPeople, [
