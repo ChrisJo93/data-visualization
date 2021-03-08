@@ -2,6 +2,19 @@ const express = require('express');
 const pool = require('./pool');
 const router = express.Router();
 
+router.get('/', (req, res) => {
+  const getPeople = `SELECT * FROM "people"`;
+  pool
+    .query(getPeople)
+    .then((result) => {
+      res.send(result.rows);
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 router.post('/', (req, res) => {
   const people = req.body;
   const insertPeople = `
@@ -14,7 +27,7 @@ router.post('/', (req, res) => {
       VALUES ($1, $2, $3, $4, $5);`;
   //not necessary in a smallscale application
   //adding all 50 individuals at once by calling pool query for each person.
-  people.map((person) => {
+  people.foreach((person) => {
     pool
       .query(insertPeople, [
         person.name,
