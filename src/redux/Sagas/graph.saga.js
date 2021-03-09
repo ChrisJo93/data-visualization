@@ -7,8 +7,16 @@ function* graphSaga() {
   yield takeLatest('DELETE_PEOPLE', deletePeople);
   yield takeLatest('EDIT_PEOPLE', editPeople);
 
-  function getPeople() {
-    console.log('in saga');
+  function* getPeople() {
+    try {
+      const response = yield axios.get(`/api/people`);
+      yield put({
+        type: 'SET_PEOPLE',
+        payload: response.data,
+      });
+    } catch (err) {
+      console.log(`error in get saga, ${err}`);
+    }
   }
 
   function postPeople() {
