@@ -14,17 +14,20 @@ export default function Graph() {
     axios
       .get(`/api/people`)
       .then((response) => {
-        console.log(response.data);
+        setPeople(() => response.data);
       })
       .catch((error) => {
         console.log(error);
       });
+
+  console.log(people);
 
   return (
     <div>
       <button onClick={() => setTest((poopy) => !poopy)}>
         {test.toString()}
       </button>
+      <div></div>
     </div>
   );
 }
