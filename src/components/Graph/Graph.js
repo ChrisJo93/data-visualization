@@ -1,24 +1,29 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { connect, useDispatch } from 'react-redux';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
-export default function Graph() {
+function Graph() {
   const initialValue = false;
   const [test, setTest] = useState(initialValue);
   const [people, setPeople] = useState('');
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    peopleList();
+    //retrieves people data. Using redux for practice instead
+    // peopleList();
+    console.log(dispatch);
   }, []);
 
-  const peopleList = () =>
-    axios
-      .get(`/api/people`)
-      .then((response) => {
-        setPeople(() => response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  //   const peopleList = () =>
+  //     axios
+  //       .get(`/api/people`)
+  //       .then((response) => {
+  //         setPeople(() => response.data);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
 
   console.log(people);
 
@@ -31,3 +36,5 @@ export default function Graph() {
     </div>
   );
 }
+
+export default connect(mapStoreToProps)(Graph);
