@@ -15,7 +15,7 @@ function Graph() {
     dispatch({
       type: 'GET_PEOPLE',
     });
-    console.log(this.store.props.graphR);
+    console.log(this.props.store.graphR);
   }, []);
 
   //   const peopleList = () =>
