@@ -1,10 +1,10 @@
-const graph = (state = [], action) => {
+const graphR = (state = [], action) => {
   switch (action.type) {
     case 'SET_PEOPLE':
-      return console.log('I made it coach, reducer');
+      return action.payload;
     default:
       return state;
   }
 };
 
-export default graph;
+export default graphR;

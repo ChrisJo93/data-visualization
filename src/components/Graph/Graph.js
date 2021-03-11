@@ -12,7 +12,10 @@ function Graph() {
   useEffect(() => {
     //retrieves people data. Using redux for practice instead
     // peopleList();
-    console.log(dispatch);
+    dispatch({
+      type: 'GET_PEOPLE',
+    });
+    console.log(this.store.props.graphR);
   }, []);
 
   //   const peopleList = () =>
