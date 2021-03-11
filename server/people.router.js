@@ -26,23 +26,40 @@ router.post('/', (req, res) => {
       VALUES ($1, $2, $3, $4, $5);`;
   //not necessary in a smallscale application
   //adding all 50 individuals at once by calling pool query for each person.
-  people.forEach((person) => {
-    pool
-      .query(insertPeople, [
-        person.name,
-        person.ethnicity,
-        person.education,
-        person.gender,
-        person.language,
-      ])
-      .then((result) => {
-        res.sendStatus(201);
-      })
-      .catch((error) => {
-        console.log(`Problem adding people to database, ${error}`);
-        res.sendStatus(500);
-      });
+  //   people.forEach((person) => {
+  //     pool
+  //       .query(insertPeople, [
+  //         person.name,
+  //         person.ethnicity,
+  //         person.education,
+  //         person.gender,
+  //         person.language,
+  //       ])
+  //       .then((result) => {
+  //         res.sendStatus(201);
+  //       })
+  //       .catch((error) => {
+  //         console.log(`Problem adding people to database, ${error}`);
+  //         res.sendStatus(500);
+  //       });
+  //   });
+  // });
+  const promises = people.map((person) => {
+    pool.query(insertPeople, [
+      person.name,
+      person.ethnicity,
+      person.education,
+      person.gender,
+      person.language,
+    ]);
   });
+  Promise.all(promises)
+    .then((result) => {
+      res.sendStatus(201);
+    })
+    .catch((error) => {
+      console.log('it ait work', error);
+      res.sendStatus(500);
+    });
 });
-
 module.exports = router;
