@@ -16,7 +16,7 @@ function Graph(props) {
     console.log(people);
   }, [dispatch, props.store.graphR, people]);
 
-  //Axios call for people list within Graph file. Using redux for practice.
+  //Axios call for people list. Using redux for practice.
   /* const peopleList = () =>
       axios
         .get(`/api/people`)
