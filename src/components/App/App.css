@@ -14,12 +14,6 @@
   align-items: center;
 }
 
-.buttonBox {
-  display: flex;
-  flex-direction: row;
-}
-
-button {
-  padding: 1em;
-  margin: 1em;
+.navBar {
+  background-color: navy;
 }

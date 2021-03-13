@@ -1,20 +1,30 @@
 import { useState, useEffect } from 'react';
 import { connect, useDispatch } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
+import mapStoreToProps from '../../Redux/mapStoreToProps';
 import axios from 'axios';
 
 function Graph(props) {
-  const [people, setPeople] = useState('');
   const dispatch = useDispatch();
+  const [people, setPeople] = useState([]);
 
-  useEffect(() => {
-    // peopleList();
+  const dispatchCall = () => {
     dispatch({
       type: 'GET_PEOPLE',
     });
-    setPeople(props.store.graphR.join(''));
+    setPeople(props.store.graphR);
+  };
+
+  useEffect(() => {
+    // peopleList();
+    let mounted = true;
+    if (mounted) {
+      dispatchCall();
+    }
     console.log(people);
-  }, [dispatch, props.store.graphR, people]);
+    if (people !== []) {
+      mounted = false;
+    }
+  }, [people]);
 
   //Axios call for people list. Using redux for practice.
   /* const peopleList = () =>
@@ -26,17 +36,8 @@ function Graph(props) {
         .catch((error) => {
           console.log(error);
           });  */
-  const stupid = Array.from(people);
-  const stupid2 = stupid.map((person) => person.name);
 
-  return (
-    <div>
-      <button onClick={() => console.log(stupid)}>hey girl hey</button>
-      <button onClick={() => console.log(stupid2)}>I am here</button>
-
-      <div></div>
-    </div>
-  );
+  return <div>'nothing</div>;
 }
 
 export default connect(mapStoreToProps)(Graph);
