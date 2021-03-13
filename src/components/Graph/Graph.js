@@ -6,24 +6,18 @@ import axios from 'axios';
 function Graph(props) {
   const dispatch = useDispatch();
   const [people, setPeople] = useState([]);
-
-  const dispatchCall = () => {
+  const dispatchCall = (item) => {
     dispatch({
       type: 'GET_PEOPLE',
     });
-    setPeople(props.store.graphR);
+    return (item = props.store.graphR);
   };
 
   useEffect(() => {
     // peopleList();
-    let mounted = true;
-    if (mounted) {
-      dispatchCall();
-    }
+    dispatchCall().then((item) => setPeople(item));
+    setPeople(props.store.graphR);
     console.log(people);
-    if (people !== []) {
-      mounted = false;
-    }
   }, [people]);
 
   //Axios call for people list. Using redux for practice.
@@ -37,7 +31,7 @@ function Graph(props) {
           console.log(error);
           });  */
 
-  return <div>'nothing</div>;
+  return <div>'noth</div>;
 }
 
 export default connect(mapStoreToProps)(Graph);
