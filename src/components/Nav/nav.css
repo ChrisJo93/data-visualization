@@ -1,0 +1,15 @@
+.navBanner {
+  position: relative;
+  width: 60%;
+  height: 50px;
+  background-size: cover;
+  overflow: hidden;
+  background-position: center center;
+  background-color: rgb(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.4);
+}
+
+.navLink {
+  display: flex;
+  flex-direction: row;
+}

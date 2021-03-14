@@ -1,7 +1,26 @@
+body {
+  margin: 3rem 13rem;
+  background-color: dodgerblue;
+}
+
+.navBar {
+  position: relative;
+  margin-bottom: 4em;
+  width: auto;
+  height: 50px;
+  background-size: cover;
+  overflow: hidden;
+  background-position: center center;
+  border: 1px black solid;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgb(0, 0, 0, 0.4);
+  background-color: white;
+}
+
 .box {
   text-align: center;
   border: 1px black solid;
-  box-shadow: 1rem 1rem 1rem 8px grey;
+  box-shadow: 1rem 1rem 1rem 0px #165a9f;
   border-radius: 5px;
   width: 30rem;
   height: 20rem;
@@ -12,8 +31,5 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-}
-
-.navBar {
-  background-color: navy;
+  background-color: white;
 }
