@@ -1,22 +1,14 @@
 import { connect } from 'react-redux';
 import { Component } from 'react';
-import mapStoreToProps from '../../Redux/mapStoreToProps';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 
 import './App.css';
 import Graph from '../Graph/graph';
 import Nav from '../Nav/nav';
 
 class App extends Component {
-  state = {
-    peopleList: [],
-  };
   componentDidMount() {
-    this.props.dispatch({
-      type: 'GET_PEOPLE',
-    });
-    this.setState({
-      peopleList: this.props.store.graphR,
-    });
+    console.log(this.props);
   }
 
   render() {
@@ -26,7 +18,7 @@ class App extends Component {
           <Nav />
         </header>
         <div className="box">
-          <Graph peopleList={this.state.peopleList} />
+          <Graph />
         </div>
       </div>
     );

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import mapStoreToProps from '../../Redux/mapStoreToProps';
+import mapStoreToProps from '../../redux/mapStoreToProps';
 import axios from 'axios';
 
 function Graph(props) {
-  return <div>chart time baby</div>;
+  console.log(props);
+  return <div>chart times</div>;
 }
 
 export default connect(mapStoreToProps)(Graph);
