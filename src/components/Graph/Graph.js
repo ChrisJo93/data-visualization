@@ -5,7 +5,16 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import axios from 'axios';
 
 function Graph(props) {
-  const data = [
+  const data = props.store.graphR;
+  let people;
+  data.map((person) => {
+    if (person.ethnicity === person.ethnicity) {
+      console.log((person.ethnicity += 1));
+    }
+    console.log(people);
+  });
+
+  const ethnicity = [
     { name: 'Race', value: 400 },
     { name: 'Group B', value: 300 },
     { name: 'Group C', value: 300 },
@@ -100,7 +109,7 @@ function Graph(props) {
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
-        data={data}
+        data={data2}
         cx={200}
         cy={200}
         innerRadius={60}
