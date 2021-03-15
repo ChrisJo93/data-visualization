@@ -18,16 +18,7 @@ function Graph(props) {
     ethnicityCount[num] = (ethnicityCount[num] || 0) + 1;
   }
 
-  const ethnicityKeys = Object.keys(ethnicityCount);
-  const ethnicityKey = ethnicityKeys.map((key) => key);
-  console.log(ethnicityKey);
-
-  const ethnicityValues = Object.values(ethnicityCount);
-  for (let i = 0; i < ethnicityValues.length; i++) {
-    let value = ethnicityValues[i];
-  }
-
-  const reference = [{ name: ethnicityKey, value: ethnicityValues }];
+  const reference = [{ name: 'crap', value: 500 }];
 
   const renderActiveShape = (props) => {
     const RADIAN = Math.PI / 180;
