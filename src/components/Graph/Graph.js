@@ -5,23 +5,29 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 import axios from 'axios';
 
 function Graph(props) {
-  const data = props.store.graphR;
-  let people;
-  data.map((person) => {
-    if (person.ethnicity === person.ethnicity) {
-      console.log((person.ethnicity += 1));
-    }
-    console.log(people);
-  });
+  const people = props.store.graphR;
+  //storing people entries
+  const ethnicity = props.store.graphR.map((person) => person.ethnicity);
+  //storing only ethnicity key values
 
-  const ethnicity = [
-    { name: 'Race', value: 400 },
-    { name: 'Group B', value: 300 },
-    { name: 'Group C', value: 300 },
-    { name: 'Group D', value: 200 },
-  ];
+  let ethnicityCount = {};
+  //counting how many times an ethnicity is referenced
+  //this count will be used for pie chart value
+  for (let i = 0; i < ethnicity.length; i++) {
+    let num = ethnicity[i];
+    ethnicityCount[num] = (ethnicityCount[num] || 0) + 1;
+  }
 
-  const data2 = [{ name: 'gender', value: 500 }];
+  const ethnicityKeys = Object.keys(ethnicityCount);
+  const ethnicityKey = ethnicityKeys.map((key) => key);
+  console.log(ethnicityKey);
+
+  const ethnicityValues = Object.values(ethnicityCount);
+  for (let i = 0; i < ethnicityValues.length; i++) {
+    let value = ethnicityValues[i];
+  }
+
+  const reference = [{ name: ethnicityKey, value: ethnicityValues }];
 
   const renderActiveShape = (props) => {
     const RADIAN = Math.PI / 180;
@@ -109,7 +115,7 @@ function Graph(props) {
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
-        data={data2}
+        data={reference}
         cx={200}
         cy={200}
         innerRadius={60}
