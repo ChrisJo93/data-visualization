@@ -17,30 +17,28 @@ function Graph(props) {
     let count = ethnicity[i];
     ethnicityKeyValues[count] = (ethnicityKeyValues[count] || 0) + 1;
   }
+
   let data = [];
-  function pieDataMaker(arr1, arr2) {
-    for (let i = 0; i < arr1.length; i++) {
-      data.push({ name: arr1[i] });
-    }
-    for (let j = 0; j < arr2.length; j++) {
-      data.push({ value: arr2[j] });
-    }
-    console.log(data);
 
-    // return { value: arr2 };
+  // function ethnicityDataMaker(arr1, arr2) {
+  //   for (let i = 0; i < arr1.length; i++) {
+  //     for (let j = 0; j < arr2.length; j++) {
+  //       data.push({ name: arr1[i], value: arr2[j] });
+  //     }
+  //   }
+  //   console.log(data);
+  // }
+
+  // ethnicityDataMaker(
+  //   Object.keys(ethnicityKeyValues),
+  //   Object.values(ethnicityKeyValues)
+  // );
+
+  for (const keys of Object.keys(ethnicityKeyValues)) {
+    for (const values of Object.values(ethnicityKeyValues)) {
+      data.push({ name: keys, value: values });
+    }
   }
-
-  console.log(
-    pieDataMaker(
-      Object.keys(ethnicityKeyValues),
-      Object.values(ethnicityKeyValues)
-    )
-  );
-
-  // const data = [
-  //   { name: 'dude', value: 3 },
-  //   { name: 'guy', value: 2 },
-  // ];
 
   const renderActiveShape = (props) => {
     const RADIAN = Math.PI / 180;
