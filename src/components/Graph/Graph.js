@@ -10,16 +10,37 @@ function Graph(props) {
   const ethnicity = people.map((person) => person.ethnicity);
   //storing only ethnicity key values
 
-  let ethnicityCount = {};
+  let ethnicityKeyValues = {};
   //counting how many times an ethnicity is referenced
   //this count will be used for pie chart value
   for (let i = 0; i < ethnicity.length; i++) {
     let count = ethnicity[i];
-    ethnicityCount[count] = (ethnicityCount[count] || 0) + 1;
+    ethnicityKeyValues[count] = (ethnicityKeyValues[count] || 0) + 1;
   }
-  console.log(ethnicityCount);
+  let data = [];
+  function pieDataMaker(arr1, arr2) {
+    for (let i = 0; i < arr1.length; i++) {
+      data.push({ name: arr1[i] });
+    }
+    for (let j = 0; j < arr2.length; j++) {
+      data.push({ value: arr2[j] });
+    }
+    console.log(data);
 
-  const data = [{ name: ethnicityCount, value: ethnicityCount.value }];
+    // return { value: arr2 };
+  }
+
+  console.log(
+    pieDataMaker(
+      Object.keys(ethnicityKeyValues),
+      Object.values(ethnicityKeyValues)
+    )
+  );
+
+  // const data = [
+  //   { name: 'dude', value: 3 },
+  //   { name: 'guy', value: 2 },
+  // ];
 
   const renderActiveShape = (props) => {
     const RADIAN = Math.PI / 180;
