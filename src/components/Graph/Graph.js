@@ -7,18 +7,19 @@ import axios from 'axios';
 function Graph(props) {
   const people = props.store.graphR;
   //storing people entries
-  const ethnicity = props.store.graphR.map((person) => person.ethnicity);
+  const ethnicity = people.map((person) => person.ethnicity);
   //storing only ethnicity key values
 
   let ethnicityCount = {};
   //counting how many times an ethnicity is referenced
   //this count will be used for pie chart value
   for (let i = 0; i < ethnicity.length; i++) {
-    let num = ethnicity[i];
-    ethnicityCount[num] = (ethnicityCount[num] || 0) + 1;
+    let count = ethnicity[i];
+    ethnicityCount[count] = (ethnicityCount[count] || 0) + 1;
   }
+  console.log(ethnicityCount);
 
-  const reference = [{ name: 'crap', value: 500 }];
+  const data = [{ name: ethnicityCount, value: ethnicityCount.value }];
 
   const renderActiveShape = (props) => {
     const RADIAN = Math.PI / 180;
@@ -106,7 +107,7 @@ function Graph(props) {
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
-        data={reference}
+        data={data}
         cx={200}
         cy={200}
         innerRadius={60}
