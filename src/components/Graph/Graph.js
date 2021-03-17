@@ -20,6 +20,8 @@ function Graph(props) {
       let count = ethnicity[i];
       ethnicityKeyValues[count] = (ethnicityKeyValues[count] || 0) + 1;
     }
+    console.log(Object.keys(ethnicityKeyValues));
+    console.log(Object.values(ethnicityKeyValues));
 
     const key = Object.keys(ethnicityKeyValues);
     const value = Object.values(ethnicityKeyValues);
@@ -28,16 +30,11 @@ function Graph(props) {
         data.push({ name: keys, value: values });
       }
     }
-    data.filter((item, index) => {
-      console.log(data);
-      return data.indexOf(item) === index;
-    });
   };
-
   dataUpdate();
-  // const resultArr = dataArr.filter((data,index)=>{
-  //   return dataArr.indexOf(data) === index;
-  // })
+
+  // list = list.filter((elem, index, self) => self.findIndex(
+  //   (t) => {return (t.x === elem.x && t.y === elem.y)}) === index)
 
   const renderActiveShape = (props) => {
     const RADIAN = Math.PI / 180;
