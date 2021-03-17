@@ -4,10 +4,15 @@ import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 function Graph(props) {
+  const [dataSet, setData] = useState([]);
   const people = props.store.graphR;
   //storing people from reducer
   let ethnicityKeyValues = {};
   let data = [];
+  let buttData = [
+    { name: 'butt', value: 2 },
+    { name: 'buttox', value: 6 },
+  ];
 
   const dataUpdate = () => {
     const ethnicity = people.map((person) => person.ethnicity);
@@ -115,7 +120,7 @@ function Graph(props) {
         <Pie
           activeIndex={activeIndex}
           activeShape={renderActiveShape}
-          data={data}
+          data={dataSet}
           cx={300}
           cy={170}
           innerRadius={140}
