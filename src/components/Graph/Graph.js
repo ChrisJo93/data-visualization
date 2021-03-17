@@ -1,44 +1,43 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { PieChart, Pie, Sector } from 'recharts';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import axios from 'axios';
 
 function Graph(props) {
   const people = props.store.graphR;
   //storing people entries
-  const ethnicity = people.map((person) => person.ethnicity);
-  //storing only ethnicity key values
 
   let ethnicityKeyValues = {};
   //counting how many times an ethnicity is referenced
   //this count will be used for pie chart value
-  for (let i = 0; i < ethnicity.length; i++) {
-    let count = ethnicity[i];
-    ethnicityKeyValues[count] = (ethnicityKeyValues[count] || 0) + 1;
-  }
-
   let data = [];
 
-  // function ethnicityDataMaker(arr1, arr2) {
-  //   for (let i = 0; i < arr1.length; i++) {
-  //     for (let j = 0; j < arr2.length; j++) {
-  //       data.push({ name: arr1[i], value: arr2[j] });
-  //     }
-  //   }
-  //   console.log(data);
-  // }
+  const dataUpdate = () => {
+    const ethnicity = people.map((person) => person.ethnicity);
+    //storing only ethnicity key values
 
-  // ethnicityDataMaker(
-  //   Object.keys(ethnicityKeyValues),
-  //   Object.values(ethnicityKeyValues)
-  // );
-
-  for (const keys of Object.keys(ethnicityKeyValues)) {
-    for (const values of Object.values(ethnicityKeyValues)) {
-      data.push({ name: keys, value: values });
+    for (let i = 0; i < ethnicity.length; i++) {
+      let count = ethnicity[i];
+      ethnicityKeyValues[count] = (ethnicityKeyValues[count] || 0) + 1;
     }
-  }
+
+    const key = Object.keys(ethnicityKeyValues);
+    const value = Object.values(ethnicityKeyValues);
+    for (const keys of key) {
+      for (const values of value) {
+        data.push({ name: keys, value: values });
+      }
+    }
+    data.filter((item, index) => {
+      console.log(data);
+      return data.indexOf(item) === index;
+    });
+  };
+
+  dataUpdate();
+  // const resultArr = dataArr.filter((data,index)=>{
+  //   return dataArr.indexOf(data) === index;
+  // })
 
   const renderActiveShape = (props) => {
     const RADIAN = Math.PI / 180;
