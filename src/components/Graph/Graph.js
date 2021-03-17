@@ -1,47 +1,32 @@
 import { useState, useCallback, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { PieChart, Pie, Sector } from 'recharts';
+import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 function Graph(props) {
   const people = props.store.graphR;
-  //storing people entries
-
+  //storing people from reducer
   let ethnicityKeyValues = {};
-  //counting how many times an ethnicity is referenced
-  //this count will be used for pie chart value
   let data = [];
 
   const dataUpdate = () => {
     const ethnicity = people.map((person) => person.ethnicity);
-    //storing only ethnicity key values
+    //selecting ethnicity property for each person
 
     for (let i = 0; i < ethnicity.length; i++) {
       let count = ethnicity[i];
       ethnicityKeyValues[count] = (ethnicityKeyValues[count] || 0) + 1;
+      //counting how many times an ethnicity is referenced for value
     }
-
-    // const key = Object.keys(ethnicityKeyValues);
-    // const value = Object.values(ethnicityKeyValues);
-    // for (const keys of key) {
-    //   for (const values of value) {
-    //     data.push({ name: keys, value: values });
-    //   }
-    // }
 
     for (const [key, value] of Object.entries(ethnicityKeyValues)) {
+      //storing ethnicity and count in an array of objects
+      //pie chart requires a data object with "name" and "value" keys.
       data.push({ name: key, value: value });
     }
-
-    // for (const [key, value] of Object.entries(object1)) {
-    //   console.log(`${key}: ${value}`);
-    // }
   };
 
   dataUpdate();
-
-  // list = list.filter((elem, index, self) => self.findIndex(
-  //   (t) => {return (t.x === elem.x && t.y === elem.y)}) === index)
 
   const renderActiveShape = (props) => {
     const RADIAN = Math.PI / 180;
@@ -102,7 +87,7 @@ function Graph(props) {
           y={ey}
           textAnchor={textAnchor}
           fill="#333"
-        >{`PV ${value}`}</text>
+        >{`Total: ${value}`}</text>
         <text
           x={ex + (cos >= 0 ? 1 : -1) * 12}
           y={ey}
@@ -125,20 +110,22 @@ function Graph(props) {
   );
 
   return (
-    <PieChart width={400} height={400}>
-      <Pie
-        activeIndex={activeIndex}
-        activeShape={renderActiveShape}
-        data={data}
-        cx={200}
-        cy={200}
-        innerRadius={60}
-        outerRadius={80}
-        fill="#8884d8"
-        dataKey="value"
-        onMouseEnter={onPieEnter}
-      />
-    </PieChart>
+    <ResponsiveContainer width="95%" height={700}>
+      <PieChart width={500} height={500}>
+        <Pie
+          activeIndex={activeIndex}
+          activeShape={renderActiveShape}
+          data={data}
+          cx={300}
+          cy={170}
+          innerRadius={140}
+          outerRadius={160}
+          fill="#8884d8"
+          dataKey="value"
+          onMouseEnter={onPieEnter}
+        />
+      </PieChart>
+    </ResponsiveContainer>
   );
 }
 export default connect(mapStoreToProps)(Graph);
