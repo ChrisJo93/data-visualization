@@ -20,17 +20,24 @@ function Graph(props) {
       let count = ethnicity[i];
       ethnicityKeyValues[count] = (ethnicityKeyValues[count] || 0) + 1;
     }
-    console.log(Object.keys(ethnicityKeyValues));
-    console.log(Object.values(ethnicityKeyValues));
 
-    const key = Object.keys(ethnicityKeyValues);
-    const value = Object.values(ethnicityKeyValues);
-    for (const keys of key) {
-      for (const values of value) {
-        data.push({ name: keys, value: values });
-      }
+    // const key = Object.keys(ethnicityKeyValues);
+    // const value = Object.values(ethnicityKeyValues);
+    // for (const keys of key) {
+    //   for (const values of value) {
+    //     data.push({ name: keys, value: values });
+    //   }
+    // }
+
+    for (const [key, value] of Object.entries(ethnicityKeyValues)) {
+      data.push({ name: key, value: value });
     }
+
+    // for (const [key, value] of Object.entries(object1)) {
+    //   console.log(`${key}: ${value}`);
+    // }
   };
+
   dataUpdate();
 
   // list = list.filter((elem, index, self) => self.findIndex(
