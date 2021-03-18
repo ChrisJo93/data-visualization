@@ -7,11 +7,11 @@ import Graph from '../Graph/graph';
 import Nav from '../Nav/nav';
 
 class App extends Component {
-  componentDidMount() {
-    this.props.dispatch({
-      type: 'GET_PEOPLE',
-    });
-  }
+  // componentDidMount() {
+  //   this.props.dispatch({
+  //     type: 'GET_PEOPLE',
+  //   });
+  // }
 
   render() {
     return (

@@ -1,11 +1,15 @@
 import { useState, useCallback, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import axios from 'axios';
 
 function Graph(props) {
   const [dataSet, setData] = useState([]);
   const people = props.store.graphR;
+  const [test, setTest] = useState([]);
+  const test2 = props.store.graphR;
+  const dispatch = useDispatch();
   //storing people from reducer
   let ethnicityKeyValues = {};
   let data = [];
@@ -30,6 +34,29 @@ function Graph(props) {
       data.push({ name: key, value: value });
     }
   };
+
+  const testFunction = () => {
+    //data is stored in variable "test" as expected
+    axios
+      .get(`/api/people`)
+      .then((response) => setTest(response.data))
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const testFunction2 = () => {
+    //data is stored in "store" as expected
+    dispatch({ type: 'GET_PEOPLE' });
+  };
+
+  useEffect(() => {
+    // testFunction();
+    testFunction2();
+  }, []);
+
+  //test2 results are not present during the first render and catch up a second later
+  console.log({ test, test2 });
 
   dataUpdate();
 
