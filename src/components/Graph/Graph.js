@@ -10,6 +10,7 @@ function Graph(props) {
   const [test, setTest] = useState([]);
   const test2 = props.store.graphR;
   const dispatch = useDispatch();
+  const info = { taco: 'taco' };
   //storing people from reducer
   let ethnicityKeyValues = {};
   let data = [];
@@ -35,28 +36,19 @@ function Graph(props) {
     }
   };
 
-  const testFunction = () => {
-    //data is stored in variable "test" as expected
-    axios
-      .get(`/api/people`)
-      .then((response) => setTest(response.data))
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
   const testFunction2 = () => {
-    //data is stored in "store" as expected
-    dispatch({ type: 'GET_PEOPLE' });
+    console.log('function fired');
+    //think of the payload as a keyword as opposed to the key waiting for a value
+    //when we call "payload" we're expecting an object to be passed.
+    //info here is an object {taco: 'taco'}
+    //if I don't pass an object, then whatever gets passed will be treated as the key waiting for a value
+    //For example, payload: "taco"  will appear on the server as {taco: ''}
+    dispatch({ type: 'TEST_POST', payload: info });
   };
 
   useEffect(() => {
-    // testFunction();
     testFunction2();
   }, []);
-
-  //test2 results are not present during the first render and catch up a second later
-  console.log({ test, test2 });
 
   dataUpdate();
 

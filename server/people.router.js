@@ -14,6 +14,14 @@ router.get('/', (req, res) => {
     });
 });
 
+router.post('/update', (req, res) => {
+  console.log('router hit');
+  console.log(req.body);
+  //req.body will provide the object with key value pair {taco: 'taco'}
+  console.log(req.body.taco);
+  //req.body.taco will then provide just the value of "taco"
+});
+
 router.post('/', (req, res) => {
   const people = req.body;
   const insertPeople = `

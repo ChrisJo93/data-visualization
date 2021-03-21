@@ -6,6 +6,7 @@ function* graphSaga() {
   yield takeLatest('POST_PEOPLE', postPeople);
   yield takeLatest('DELETE_PEOPLE', deletePeople);
   yield takeLatest('EDIT_PEOPLE', editPeople);
+  yield takeLatest('TEST_POST', postFile);
 
   function* getPeople() {
     try {
@@ -16,6 +17,16 @@ function* graphSaga() {
       });
     } catch (err) {
       console.log(`error in get saga, ${err}`);
+    }
+  }
+
+  function* postFile(action) {
+    try {
+      //axios call to add message
+      console.log('saga fired');
+      yield axios.post('/api/people/update', action.payload);
+    } catch (err) {
+      console.log(err);
     }
   }
 
