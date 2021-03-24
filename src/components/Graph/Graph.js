@@ -7,17 +7,10 @@ import axios from 'axios';
 function Graph(props) {
   const [dataSet, setData] = useState([]);
   const people = props.store.graphR;
-  const [test, setTest] = useState([]);
-  const test2 = props.store.graphR;
-  const dispatch = useDispatch();
-  const info = { taco: 'taco' };
+
   //storing people from reducer
   let ethnicityKeyValues = {};
   let data = [];
-  let buttData = [
-    { name: 'butt', value: 2 },
-    { name: 'buttox', value: 6 },
-  ];
 
   const dataUpdate = () => {
     const ethnicity = people.map((person) => person.ethnicity);
@@ -35,20 +28,6 @@ function Graph(props) {
       data.push({ name: key, value: value });
     }
   };
-
-  const testFunction2 = () => {
-    console.log('function fired');
-    //think of the payload as a keyword as opposed to the key waiting for a value
-    //when we call "payload" we're expecting an object to be passed.
-    //info here is an object {taco: 'taco'}
-    //if I don't pass an object, then whatever gets passed will be treated as the key waiting for a value
-    //For example, payload: "taco"  will appear on the server as {taco: ''}
-    dispatch({ type: 'TEST_POST', payload: info });
-  };
-
-  useEffect(() => {
-    testFunction2();
-  }, []);
 
   dataUpdate();
 
