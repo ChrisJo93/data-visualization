@@ -1,8 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts';
 import mapStoreToProps from '../../redux/mapStoreToProps';
-import axios from 'axios';
 
 function Graph(props) {
   const [dataSet, setData] = useState([]);
